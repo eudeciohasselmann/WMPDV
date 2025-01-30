@@ -1,6 +1,11 @@
+networks:
+  wmpdv_network:
+    driver: bridge
 services:
   api:
     build: .
+    networks:
+      - wmpdv_network
     ports:
       - "8000:8000"
   db:
@@ -13,6 +18,8 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
+    networks:
+      - wmpdv_network
 
 volumes:
   postgres_data:
